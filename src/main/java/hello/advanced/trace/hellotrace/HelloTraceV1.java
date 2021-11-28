@@ -18,12 +18,15 @@ public class HelloTraceV1 {
         log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
         return new TraceStatus(traceId, startTimeMs, message);
     }
+
     public void end(TraceStatus status){
         complete(status, null);
     }
+
     public void exception(TraceStatus status, Exception e){
         complete(status, e);
     }
+
     private void complete(TraceStatus status, Exception e){
         Long stopTimeMs = System.currentTimeMillis();
         long resultTimeMs = stopTimeMs - status.getStartTimeMs();
