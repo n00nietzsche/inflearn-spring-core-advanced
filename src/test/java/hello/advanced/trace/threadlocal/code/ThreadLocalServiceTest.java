@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class FieldServiceTest {
-    private FieldService fieldService = new FieldService();
+public class ThreadLocalServiceTest {
+    private ThreadLocalService fieldService = new ThreadLocalService();
 
     @Test
     void field() {
@@ -31,9 +31,9 @@ public class FieldServiceTest {
         // start는 로직을 실행한다기보다 스레드를 그냥 Runnable 한 상태로 만들 뿐이다.
         threadA.start();
 //        sleep(2000); // 동시성 문제가 발생하지 않는 코드
-        sleep(100); // 동시성 문제가 발생하는 코드, 조회하기 전에 저장된 값을 바꿔버린다.
+        // sleep(100); // 동시성 문제가 발생하는 코드, 조회하기 전에 저장된 값을 바꿔버린다.
         threadB.start();
-        sleep(3000); // 메인 스레드 종료 대기
+//        sleep(3000); // 메인 스레드 종료 대기
         // 사실 대기할 때는 countdown latch 등 더 좋은 방법이 많다.
         log.info("main exit");
     }
