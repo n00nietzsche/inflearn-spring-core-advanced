@@ -81,7 +81,32 @@ public class ContextV1Test {
         context1.execute();
 
         StrategyLogic2 strategyLogic2 = new StrategyLogic2();
-        ContextV1 context2 = new ContextV1(strategyLogic1);
+        ContextV1 context2 = new ContextV1(strategyLogic2);
+        context2.execute();
+    }
+
+    @Test
+    void strategyV2() {
+        // 익명 내부 클래스 사용
+        Strategy strategyLogic1 = () -> log.info("비즈니스 로직1 실행");
+        ContextV1 context1 = new ContextV1(strategyLogic1);
+        log.info("class={}", strategyLogic1.getClass());
+        context1.execute();
+
+        Strategy strategyLogic2 = () -> log.info("비즈니스 로직2 실행");
+        ContextV1 context2 = new ContextV1(strategyLogic2);
+        log.info("class={}", strategyLogic2.getClass());
+        context2.execute();
+    }
+
+    @Test
+    void strategyV3() {
+        // 익명 내부 클래스 사용
+        // 람다는 인터페이스에서 구현해야 할 메소드가 단 1개일 때 편리하게 쓸 수 있다.
+        ContextV1 context1 = new ContextV1(() -> log.info("비즈니스 로직1 실행"));
+        context1.execute();
+
+        ContextV1 context2 = new ContextV1(() -> log.info("비즈니스 로직2 실행"));
         context2.execute();
     }
 }
