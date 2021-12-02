@@ -1,5 +1,6 @@
 package hello.advanced;
 
+import hello.advanced.trace.callback.TraceTemplate;
 import hello.advanced.trace.logtrace.FieldLogTrace;
 import hello.advanced.trace.logtrace.LogTrace;
 import hello.advanced.trace.logtrace.ThreadLocalLogTrace;
@@ -13,5 +14,10 @@ public class LogTraceConfig {
     @Bean
     public LogTrace logTrace() {
         return new ThreadLocalLogTrace();
+    }
+
+    @Bean
+    public TraceTemplate traceTemplate() {
+        return new TraceTemplate(logTrace());
     }
 }
